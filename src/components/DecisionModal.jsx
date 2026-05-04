@@ -145,7 +145,7 @@ const DecisionModal = ({ request, onClose, onDecisionComplete }) => {
     title: {
       fontSize: '1.25rem',
       fontWeight: '600',
-      color: '#111827',
+      color: 'teal',
       margin: 0
     },
     closeButton: {
@@ -164,7 +164,7 @@ const DecisionModal = ({ request, onClose, onDecisionComplete }) => {
       flex: 1
     },
     infoCard: {
-      backgroundColor: '#f9fafb',
+      backgroundColor: '#9cd7ca',
       borderRadius: '10px',
       padding: '1rem',
       marginBottom: '1.25rem',
@@ -240,7 +240,7 @@ const DecisionModal = ({ request, onClose, onDecisionComplete }) => {
       cursor: 'pointer'
     },
     input: {
-      width: '100%',
+      width: '90%',
       padding: '0.5rem 0.75rem',
       border: '1px solid #d1d5db',
       borderRadius: '8px',
@@ -249,7 +249,7 @@ const DecisionModal = ({ request, onClose, onDecisionComplete }) => {
       transition: 'border-color 0.2s, box-shadow 0.2s'
     },
     textarea: {
-      width: '100%',
+      width: '90%',
       padding: '0.5rem 0.75rem',
       border: '1px solid #d1d5db',
       borderRadius: '8px',
@@ -293,7 +293,7 @@ const DecisionModal = ({ request, onClose, onDecisionComplete }) => {
     },
     submitButton: {
       padding: '0.5rem 1rem',
-      backgroundColor: '#111827',
+      backgroundColor: 'teal',
       border: 'none',
       borderRadius: '8px',
       fontSize: '0.875rem',

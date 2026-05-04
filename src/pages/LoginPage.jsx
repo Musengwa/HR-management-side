@@ -33,7 +33,7 @@ const LoginPage = () => {
     setLoading(false);
   };
 
-  // Professional black & white styles (vanilla CSS)
+  // Black, white, and teal styles (vanilla CSS)
   const styles = {
     container: {
       minHeight: '100vh',
@@ -41,14 +41,14 @@ const LoginPage = () => {
       alignItems: 'center',
       justifyContent: 'center',
       padding: '1rem',
-      backgroundColor: '#f4f6f9',
+      backgroundColor: 'rgba(5, 12, 14, 0.58)',
       fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif'
     },
     card: {
       backgroundColor: '#ffffff',
       borderRadius: '16px',
-      boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02)',
-      border: '1px solid #eef2f6',
+      boxShadow: '0 18px 30px -18px rgba(0, 0, 0, 0.55), 0 8px 24px -16px rgba(18, 179, 166, 0.45)',
+      border: '1px solid #c8ebe7',
       width: '100%',
       maxWidth: '440px',
       padding: '2rem'
@@ -61,12 +61,12 @@ const LoginPage = () => {
     iconCircle: {
       width: '64px',
       height: '64px',
-      backgroundColor: '#f9fafb',
+      backgroundColor: '#e8f8f6',
       borderRadius: '32px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      border: '1px solid #e5e7eb'
+      border: '1px solid #8edfd6'
     },
     title: {
       textAlign: 'center',
@@ -79,7 +79,7 @@ const LoginPage = () => {
     subtitle: {
       textAlign: 'center',
       fontSize: '0.875rem',
-      color: '#4b5563',
+      color: '#35575b',
       marginBottom: '2rem'
     },
     form: {
@@ -100,9 +100,10 @@ const LoginPage = () => {
       color: '#4b5563'
     },
     input: {
-      width: '100%',
+      width: '90%',
       padding: '0.625rem 0.75rem',
       border: '1px solid #d1d5db',
+      backgroundColor: '#fcfffe',
       borderRadius: '10px',
       fontSize: '0.875rem',
       lineHeight: '1.25rem',
@@ -120,7 +121,7 @@ const LoginPage = () => {
     submitButton: {
       width: '100%',
       padding: '0.625rem 1rem',
-      backgroundColor: '#111827',
+      backgroundColor: '#0f766e',
       border: 'none',
       borderRadius: '10px',
       fontSize: '0.875rem',
@@ -130,15 +131,15 @@ const LoginPage = () => {
       transition: 'background-color 0.2s ease'
     },
     submitButtonDisabled: {
-      backgroundColor: '#9ca3af',
+      backgroundColor: '#6c9e99',
       cursor: 'not-allowed'
     },
     footerNote: {
       marginTop: '1.5rem',
       textAlign: 'center',
       fontSize: '0.7rem',
-      color: '#6b7280',
-      borderTop: '1px solid #f0f2f5',
+      color: '#35575b',
+      borderTop: '1px solid #d7ece9',
       paddingTop: '1rem'
     }
   };
@@ -146,11 +147,11 @@ const LoginPage = () => {
   const cssGlobals = `
     .login-input:focus {
       outline: none;
-      border-color: #111827;
-      box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.1);
+      border-color: #0f766e;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.16);
     }
     .login-submit-btn:hover:not(:disabled) {
-      background-color: #1f2937;
+      background-color: #0b5d56;
     }
   `;
 
@@ -161,7 +162,7 @@ const LoginPage = () => {
         <div style={styles.card}>
           <div style={styles.iconWrapper}>
             <div style={styles.iconCircle}>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#111827" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0f766e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </div>

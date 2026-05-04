@@ -71,10 +71,10 @@ const HrDashboard = () => {
 
   const getStatusBadge = (status) => {
     const statusConfig = {
-      APPROVED: { bg: '#e8f5e9', text: '#2e7d32', label: 'Approved' },
-      DENIED: { bg: '#ffebee', text: '#c62828', label: 'Denied' },
-      REFER_HR: { bg: '#fff8e1', text: '#f57f17', label: 'Pending HR Review' },
-      PENDING_INFO: { bg: '#e3f2fd', text: '#1565c0', label: 'Pending Info' }
+      APPROVED: { bg: '#daf7f3', text: '#0f766e', label: 'Approved' },
+      DENIED: { bg: '#ffeded', text: '#be123c', label: 'Denied' },
+      REFER_HR: { bg: '#eefcf9', text: '#155e75', label: 'Pending HR Review' },
+      PENDING_INFO: { bg: '#f0f9ff', text: '#1d4ed8', label: 'Pending Info' }
     };
     const config = statusConfig[status] || { bg: '#f5f5f5', text: '#424242', label: status };
     return (
@@ -102,17 +102,29 @@ const HrDashboard = () => {
     study: 'Study'
   };
 
-  // ---------- Vanilla CSS styles (black & white professional theme) ----------
+  const totalRequests = filteredRequests.length;
+  const pendingReviews = filteredRequests.filter((request) => request.final_decision === 'REFER_HR').length;
+  const approvedCount = filteredRequests.filter((request) => request.final_decision === 'APPROVED').length;
+  const deniedCount = filteredRequests.filter((request) => request.final_decision === 'DENIED').length;
+
+  const infoCards = [
+    { label: 'Total Requests', value: totalRequests, tint: '#0f766e', background: '#e8f9f6' },
+    { label: 'Pending Review', value: pendingReviews, tint: '#0f4c81', background: '#eaf4ff' },
+    { label: 'Approved', value: approvedCount, tint: '#166534', background: '#ecfdf3' },
+    { label: 'Denied', value: deniedCount, tint: '#be123c', background: '#fff0f4' }
+  ];
+
+  // ---------- Vanilla CSS styles (black, white, teal) ----------
   const styles = {
     container: {
       minHeight: '100vh',
-      backgroundColor: '#f4f6f9',
+      backgroundColor: 'rgba(155, 239, 225, 0.58)',
       fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif'
     },
     header: {
-      backgroundColor: '#ffffff',
-      borderBottom: '1px solid #e0e0e0',
-      boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
+      backgroundColor: 'rgba(255, 255, 255, 0.96)',
+      borderBottom: '1px solid #d6ebe8',
+      boxShadow: '0 6px 20px -16px rgba(18, 179, 166, 0.55)'
     },
     headerInner: {
       maxWidth: '1280px',
@@ -136,7 +148,7 @@ const HrDashboard = () => {
     },
     subtitle: {
       fontSize: '0.875rem',
-      color: '#4b5563',
+      color: '#35575b',
       marginTop: '0.25rem'
     },
     userSection: {
@@ -154,16 +166,16 @@ const HrDashboard = () => {
     },
     userEmail: {
       fontSize: '0.75rem',
-      color: '#6b7280'
+      color: '#35575b'
     },
     logoutButton: {
       padding: '0.5rem 1rem',
       backgroundColor: 'transparent',
-      border: '1px solid #d1d5db',
+      border: '1px solid #83cec6',
       borderRadius: '8px',
       fontSize: '0.875rem',
       fontWeight: '500',
-      color: '#374151',
+      color: '#0f766e',
       cursor: 'pointer',
       transition: 'all 0.2s ease'
     },
@@ -175,10 +187,10 @@ const HrDashboard = () => {
     filterCard: {
       backgroundColor: '#ffffff',
       borderRadius: '12px',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)',
-      border: '1px solid #eaeef2',
+      boxShadow: '0 10px 24px -20px rgba(6, 95, 90, 0.9)',
+      border: '1px solid #cfe9e5',
       padding: '1.25rem',
-      marginBottom: '2rem'
+      marginBottom: '1.25rem'
     },
     filterGrid: {
       display: 'flex',
@@ -196,13 +208,14 @@ const HrDashboard = () => {
       fontWeight: '500',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',
-      color: '#4b5563',
+      color: '#35575b',
       marginBottom: '0.5rem'
     },
     filterInput: {
-      width: '100%',
+      width: '90%',
       padding: '0.5rem 0.75rem',
-      border: '1px solid #d1d5db',
+      border: '1px solid #b9ddd8',
+      backgroundColor: '#fcfffe',
       borderRadius: '8px',
       fontSize: '0.875rem',
       transition: 'border-color 0.2s, box-shadow 0.2s'
@@ -210,21 +223,34 @@ const HrDashboard = () => {
     clearButton: {
       width: '100%',
       padding: '0.5rem 0.75rem',
-      backgroundColor: '#f9fafb',
-      border: '1px solid #d1d5db',
+      backgroundColor: '#ecf9f7',
+      border: '1px solid #9dd7d0',
       borderRadius: '8px',
       fontSize: '0.875rem',
       fontWeight: '500',
-      color: '#4b5563',
+      color: '#0f766e',
       cursor: 'pointer',
       transition: 'all 0.2s ease'
+    },
+    infoCardLabel: {
+      fontSize: '0.78rem',
+      fontWeight: '600',
+      letterSpacing: '0.02em',
+      textTransform: 'uppercase',
+      opacity: 0.92
+    },
+    infoCardValue: {
+      marginTop: '0.35rem',
+      fontSize: '1.75rem',
+      fontWeight: '700',
+      lineHeight: 1.1
     },
     tableWrapper: {
       backgroundColor: '#ffffff',
       borderRadius: '12px',
-      border: '1px solid #eaeef2',
+      border: '1px solid #cfe9e5',
       overflowX: 'auto',
-      boxShadow: '0 1px 2px rgba(0,0,0,0.02)'
+      boxShadow: '0 8px 24px -20px rgba(6, 95, 90, 0.85)'
     },
     table: {
       width: '100%',
@@ -234,17 +260,17 @@ const HrDashboard = () => {
     th: {
       textAlign: 'left',
       padding: '0.75rem 1rem',
-      backgroundColor: '#fafcfc',
-      borderBottom: '1px solid #e6edf2',
+      backgroundColor: '#f2fcfb',
+      borderBottom: '1px solid #d9ece9',
       fontWeight: '600',
-      color: '#1f2a3e',
+      color: '#1a2f32',
       fontSize: '0.75rem',
       textTransform: 'uppercase',
       letterSpacing: '0.5px'
     },
     td: {
       padding: '1rem',
-      borderBottom: '1px solid #f0f2f5',
+      borderBottom: '1px solid #edf3f2',
       color: '#1f2937',
       verticalAlign: 'middle'
     },
@@ -263,12 +289,12 @@ const HrDashboard = () => {
     },
     reviewButton: {
       padding: '0.25rem 1rem',
-      backgroundColor: '#fef9e3',
-      border: '1px solid #fde68a',
+      backgroundColor: '#e9faf7',
+      border: '1px solid #9fdad2',
       borderRadius: '20px',
       fontSize: '0.75rem',
       fontWeight: '500',
-      color: '#b45309',
+      color: '#0f766e',
       cursor: 'pointer',
       transition: 'all 0.2s ease'
     },
@@ -285,7 +311,7 @@ const HrDashboard = () => {
     retryButton: {
       marginTop: '1rem',
       padding: '0.5rem 1rem',
-      backgroundColor: '#111827',
+      backgroundColor: '#0f766e',
       border: 'none',
       borderRadius: '8px',
       color: 'white',
@@ -298,30 +324,54 @@ const HrDashboard = () => {
   const cssGlobals = `
     .filter-input:focus, .filter-select:focus {
       outline: none;
-      border-color: #111827;
-      box-shadow: 0 0 0 2px rgba(17, 24, 39, 0.1);
+      border-color: #0f766e;
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.16);
     }
     .clear-btn:hover, .logout-btn:hover {
-      background-color: #f3f4f6;
-      border-color: #9ca3af;
+      background-color: #ddf4f1;
+      border-color: #63c7bc;
     }
     .employee-link:hover {
-      color: #000000;
-      text-decoration-color: #000000;
+      color: #0f766e;
+      text-decoration-color: #0f766e;
     }
     .review-btn:hover {
-      background-color: #fef3c7;
-      border-color: #f59e0b;
+      background-color: #d5f3ee;
+      border-color: #55beb2;
       transform: translateY(-1px);
     }
     .retry-btn:hover {
-      background-color: #1f2937;
+      background-color: #0b5d56;
     }
     table tr:hover td {
-      background-color: #fafcff;
+      background-color: #f4fffd;
+    }
+    .info-tabs-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .info-tab-card {
+      flex: 1 1 180px;
+      min-height: 102px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      padding: 1rem;
+      box-shadow: 0 14px 24px -20px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(2px);
     }
     button {
       font-family: inherit;
+    }
+    @media (max-width: 768px) {
+      .info-tabs-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .info-tab-card {
+        min-height: 92px;
+      }
     }
   `;
 
@@ -410,6 +460,19 @@ const HrDashboard = () => {
                 </button>
               </div>
             </div>
+          </div>
+
+          <div className="info-tabs-grid">
+            {infoCards.map((card) => (
+              <div
+                key={card.label}
+                className="info-tab-card"
+                style={{ backgroundColor: card.background, color: card.tint }}
+              >
+                <div style={styles.infoCardLabel}>{card.label}</div>
+                <div style={styles.infoCardValue}>{card.value}</div>
+              </div>
+            ))}
           </div>
 
           {/* Requests Table */}
