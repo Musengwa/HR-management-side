@@ -1,5 +1,6 @@
 // src/pages/HrDashboard.jsx
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { requestService } from '../services/requestService';
 import EmployeeModal from '../components/EmployeeModal';
@@ -7,6 +8,7 @@ import DecisionModal from '../components/DecisionModal';
 
 const HrDashboard = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [requests, setRequests] = useState([]);
   const [filteredRequests, setFilteredRequests] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -391,6 +393,17 @@ const HrDashboard = () => {
                 <div style={styles.userName}>{user?.name}</div>
                 <div style={styles.userEmail}>{user?.email}</div>
               </div>
+              <button
+                onClick={() => navigate('/calendar')}
+                style={{
+                  ...styles.logoutButton,
+                  marginRight: '0.5rem',
+                  backgroundColor: '#ecf9f7',
+                  color: '#0891b2'
+                }}
+              >
+                📅 Calendar
+              </button>
               <button
                 onClick={logout}
                 style={styles.logoutButton}
